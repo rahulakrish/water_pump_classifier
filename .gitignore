@@ -1,0 +1,7 @@
+*.ipynb checkpoints
+*.db
+*.tsv
+*.txt
+*.ppt
+*.pptx
+*.csv
