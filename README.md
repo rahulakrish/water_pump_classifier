@@ -1,7 +1,7 @@
 # phase3_project
 
 ## Description
-  To build a model to that can predict the condition of a waterpump based on certain inout parameters
+  To build a model to that can predict the condition of a waterpump based on certain input parameters
   
 ## Dataset
   Dataset sourced from https://www.drivendata.org/competitions/7/pump-it-up-data-mining-the-water-table/page/23/
