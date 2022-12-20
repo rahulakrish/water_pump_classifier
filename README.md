@@ -1,7 +1,7 @@
 # phase3_project
 
 ## Description
-  To build a model to that can predict the condition of a waterpump based on certain inout parameters
+  To build a model to that can predict the condition of a waterpump based on certain input parameters
   
 ## Dataset
   Dataset sourced from https://www.drivendata.org/competitions/7/pump-it-up-data-mining-the-water-table/page/23/
@@ -24,38 +24,42 @@
   
  ## Tuning Hyperparameters
   #### max_depth
-  ![image](https://user-images.githubusercontent.com/108379254/208485011-024eb1b2-08e3-4c56-8e26-d5bf9a6a7e4d.png)
+  ![image](https://user-images.githubusercontent.com/108379254/208558657-1db67aa9-92b6-4938-a5a0-d14a32ab7c88.png)
 
   #### min_samples_split
-  ![image](https://user-images.githubusercontent.com/108379254/208485113-4fd41364-d903-48b1-9caa-80accbfceda7.png)
+  ![image](https://user-images.githubusercontent.com/108379254/208558728-9246d916-5087-4348-9958-7804f0637386.png)
 
-  ####
-  ![image](https://user-images.githubusercontent.com/108379254/208485349-a16c2570-3a3d-468c-aaf1-0c259d95ef10.png)
+  #### min_samples_leaf
+  ![image](https://user-images.githubusercontent.com/108379254/208558776-4d86a064-9b9b-44c3-aeaf-526efc745092.png)
+
 
 ## Building the model with the peak values: 
- ` max_depth:15`
- ` min_samples_split:28`
+ ` max_depth:20`
+ ` min_samples_split:30`
  ` min_samples_leaf:3`
  
  #### Result with the optimized parameters
- ![image](https://user-images.githubusercontent.com/108379254/208486085-64cd36e7-b9a7-4aff-8a9b-293014542c5c.png)
+ ![image](https://user-images.githubusercontent.com/108379254/208558949-49c71cdd-2bf4-48b1-afc3-8f5af0a47a40.png)
 
-## Checkgin feature_importance
-![image](https://user-images.githubusercontent.com/108379254/208486234-550c18df-82fa-4507-98c0-3ca9e60a3c65.png)
+## Checking feature_importance
+![image](https://user-images.githubusercontent.com/108379254/208559008-5b8b0795-9771-46a0-9c7a-585a2ae68c18.png)
 
 #### Using GridSearch on the model using only top10 features
-![image](https://user-images.githubusercontent.com/108379254/208486396-de0a3847-af38-4606-974c-07d51ee19df1.png)
+![image](https://user-images.githubusercontent.com/108379254/208559091-9fed5cc8-6b97-42e6-9a25-c00302b92e39.png)
 
 #### Random Forest
-![image](https://user-images.githubusercontent.com/108379254/208486542-568411c3-edd5-4ada-b7ea-2b45f74c0656.png)
+![image](https://user-images.githubusercontent.com/108379254/208559136-8694b7f7-007e-48c1-922b-c8d2a4941b03.png)
+
 
 ## Visualizing Scores of the model with optimized parameters, GridSearch and RandomForest
-![image](https://user-images.githubusercontent.com/108379254/208486709-92d2fe90-b50c-4655-b581-c4c077cc5a3a.png)
+![image](https://user-images.githubusercontent.com/108379254/208559170-a368a12e-ce10-41e5-9a88-a82e1cdea3ae.png)
+
 
 ## Checking the confusion matrix of model with top10 features Vs all_features
- ![image](https://user-images.githubusercontent.com/108379254/208487152-068fe9fe-5eeb-4723-b9f6-6b185f37842f.png)
+![image](https://user-images.githubusercontent.com/108379254/208559334-bee72be7-f4b6-4655-a4f3-4ac1842dde2e.png)
 
-We can see that the features make no difference
+
+We can see that the features make a negligible difference.
 
 ## Examining target feature
 ![image](https://user-images.githubusercontent.com/108379254/208487444-ba86e765-b029-4a20-8935-9892ad24e2b0.png)
@@ -64,7 +68,7 @@ We can see clearly that there is an imbalance in the different classes.
 We will now train a model on a balanced dataset and test it on the validation data to see check for model performance.
 
 ## Confusion Matrix between balanced and unbalanced data
-![image](https://user-images.githubusercontent.com/108379254/208487834-de3520b7-a395-4e5e-99b8-8e0b26ea48ab.png)
+![image](https://user-images.githubusercontent.com/108379254/208559440-0e82e9e8-0fb7-4b1b-9a4f-96afb4f7b6b1.png)
 
 # Next Steps
 1. Possibly re-frame this as a binary classification problem i.e functional vs non-functional and see if we can build a better model. 
