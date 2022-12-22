@@ -1,7 +1,11 @@
 # phase3_project
 
 ## Description
-  To build a model to that can predict the condition of a waterpump based on certain input parameters
+  To help the Goverment of Tanzania monitor the condition of installed waterpumps across the country.Given a set of parameters, the model should be able to     predict the status of a waterpump. Status can be as classified as:
+
+1. Functional
+2. Functional needs repair
+3. Non functional
   
 ## Dataset
   Dataset sourced from https://www.drivendata.org/competitions/7/pump-it-up-data-mining-the-water-table/page/23/
@@ -20,7 +24,7 @@
 ### K-Nearest Neighbors
   ![image](https://user-images.githubusercontent.com/108379254/208484682-64f01323-9ff8-4d90-a0e8-5258a2ec7968.png)
   
-  Since the Deccision Tree has the best recall score, we will use that for modelling and optimization.
+  Since the Decision Tree has the best recall score, we will use that for modelling and optimization.
   
  ## Tuning Hyperparameters
   #### max_depth
