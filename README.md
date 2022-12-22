@@ -74,7 +74,18 @@ We will now train a model on a balanced dataset and test it on the validation da
 1. Possibly re-frame this as a binary classification problem i.e functional vs non-functional and see if we can build a better model. 
 2. Re-create the model with equal number of data points between functional and non-functional. Optimize parameters on this balanced dataset and test it on validation data to check for performance.
 
+# More Information
+ - [Notebook](phase3_project.ipynb)
+ - [Presentation](presentation.pdf)
 
+## Repository Structure
 
+```
+├── README.md
+├── notebook.pdf
+├── phase3_project.ipynb
+├── presentation.pdf
+└── repo.pdf
+```
 
 
