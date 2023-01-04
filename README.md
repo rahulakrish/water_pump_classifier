@@ -39,7 +39,7 @@
 
 ## Building the model with the peak values: 
  ` max_depth:20`
- ` min_samples_split:30`
+ ` min_samples_split:21`
  ` min_samples_leaf:3`
  
  #### Result with the optimized parameters
