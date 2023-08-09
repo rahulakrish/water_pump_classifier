@@ -1,4 +1,4 @@
-# phase3_project
+# Water Pump Classifier
 
 ## Description
   To help the Goverment of Tanzania monitor the condition of installed waterpumps across the country.Given a set of parameters, the model should be able to     predict the status of a waterpump. Status can be as classified as:
