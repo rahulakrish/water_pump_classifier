@@ -13,74 +13,152 @@
 ## Methodololgy
   Since this a classifiaction problem, baseline models were built using Logistic Regression, Decision Trees and K-Nearest Neigbors.
   Out the of the three base models, the model with the best scores was chosen for further optimization
-  
+
+## Non-functional Pump deep-dive
+ Before modelling, it is worth looking at the data to see if we can uncover any patterns from the data:
+
+#### Non-functional pumps by Age
+The older the pump, the more likely it is to fail. We can run a histogram plot to check the rate of failures by age of the pumps:
+
+![age](https://github.com/rahulakrish/water_pump_classifier/assets/108379254/f55bd8c2-4b89-437d-b237-5eeda3b26bf2)
+
+From the plot, it is quite clear that there is a gap in data collection with majority of the pumps having no information about when they were installed. It is also surprising to see that the newer pumps have a higher failure rate compared to the older pumps.
+
+#### Non-fuctional pumps by Installer
+From the data, there are 1201 companies that have installed the pumps.Are there certain installers who have more mal fucntioning pumps than others? Visualizing all 1201 companies is difficult given the size, but we can look at the top 20 companies with the most failures:
+
+ ![installer](https://github.com/rahulakrish/water_pump_classifier/assets/108379254/ab1bb622-85e5-4740-955e-d339447ac11c)
+
+It is quite clear to see that pumps installed by DWE far outnumber the rest of the companies by factor of almost 7.
+Another question that can be asked is why one single company was given the responsibility with installing so many pumps.
+
+#### Non functional pumps by Management
+Like the installers, we can also check to see if certain companies tasked with managing the pumps perform worse compared to the others:
+
+![mgmt](https://github.com/rahulakrish/water_pump_classifier/assets/108379254/95f278b4-f885-4ac5-9247-05565e7470ce)
+
+
+#### Non-functional pumps by Subvillage
+We can plot non-functional pumps by region to see so we can focus our attention on the areas most affected right away:
+
+![vill](https://github.com/rahulakrish/water_pump_classifier/assets/108379254/a4bc7622-7027-4672-8275-e829004cd64c)
+
+
  ## Test Scores of baseline models
-  ### Logistic Regression
-  ![image](https://user-images.githubusercontent.com/108379254/208484416-838282c6-ea68-4da8-86d2-0bde4eb17042.png)
-
-### Decision Tree
-  ![image](https://user-images.githubusercontent.com/108379254/208484595-c9373c90-6920-463f-af8a-42b33aac592d.png)
-
-### K-Nearest Neighbors
-  ![image](https://user-images.githubusercontent.com/108379254/208484682-64f01323-9ff8-4d90-a0e8-5258a2ec7968.png)
+| Model         | f1_score |
+|---------------|----------|
+| Log_reg       | 0.709    |
+| Decision_tree | 0.747    |
+| KNeighbors    | 0.763    |
   
-  Since the Decision Tree has the best recall score, we will use that for modelling and optimization.
+ Since the Decision Tree has is much faster and provides more avenues for tuning, let's move forward with it.
   
  ## Tuning Hyperparameters
   #### max_depth
-  ![image](https://user-images.githubusercontent.com/108379254/208558657-1db67aa9-92b6-4938-a5a0-d14a32ab7c88.png)
+  
+![d](https://github.com/rahulakrish/water_pump_classifier/assets/108379254/6843fec7-d2e7-4da7-8f0e-5cf133530fb6)
+
 
   #### min_samples_split
-  ![image](https://user-images.githubusercontent.com/108379254/208558728-9246d916-5087-4348-9958-7804f0637386.png)
+  
+![s](https://github.com/rahulakrish/water_pump_classifier/assets/108379254/1f25b9e0-f411-423b-8665-1738fa72a15e)
+
 
   #### min_samples_leaf
-  ![image](https://user-images.githubusercontent.com/108379254/208558776-4d86a064-9b9b-44c3-aeaf-526efc745092.png)
+  
+![l](https://github.com/rahulakrish/water_pump_classifier/assets/108379254/e045ba57-443d-46fe-81de-db55963ae3ef)
 
 
 ## Building the model with the peak values: 
- ` max_depth:20`
- ` min_samples_split:21`
- ` min_samples_leaf:3`
+ ` max_depth:19`
+ ` min_samples_split:14`
+ ` min_samples_leaf:6`
+
+ | Model         | f1_score |
+|---------------|----------|
+| log_reg       | 0.709    |
+| decision_tree | 0.747    |
+| k_neighbors    | 0.763    |
+| tuned_decision_tree   | 0.757    |
  
- #### Result with the optimized parameters
- ![image](https://user-images.githubusercontent.com/108379254/208558949-49c71cdd-2bf4-48b1-afc3-8f5af0a47a40.png)
-
-## Checking feature_importance
-![image](https://user-images.githubusercontent.com/108379254/208559008-5b8b0795-9771-46a0-9c7a-585a2ae68c18.png)
-
-#### Using GridSearch on the model using only top10 features
-![image](https://user-images.githubusercontent.com/108379254/208559091-9fed5cc8-6b97-42e6-9a25-c00302b92e39.png)
+## Ensemble Methods
+Ensemble methods combine the results of several base estimators. The result would then be the average of all the estimators.
 
 #### Random Forest
-![image](https://user-images.githubusercontent.com/108379254/208559136-8694b7f7-007e-48c1-922b-c8d2a4941b03.png)
+One ensemble method called Random Forest works by building N decision trees independently on different sub-samples of data with replacement. The final result will the be the aggregated result from all the individual decision trees.
+We'll use the same optimal hyperparameters for the decision trees:
+
+| Model               | f1_score |
+|---------------------|----------|
+| log_reg             | 0.709    |
+| decision_tree       | 0.747    |
+| k_neighbors         | 0.763    |
+| tuned_decision_tree | 0.757    |
+| random_forest       | 0.767    |
+
+We can see that performance gain is marginal.
+
+#### Adaboosting
+Adaptive Boosting works by building "weak learners" and iteratively improving model performance. By assigning higher weights to results that the model got wrong and reducing weight for the correct results, successive models are built to focus on the incorrect results and thereby at the end,we have a strong learner that get most of the results correct.
+
+|     **_Model_**     | **_f1_score_** |   
+|:-------------------:|:--------------:|
+| log_reg             | 0.709          |   
+| decision_tree       | 0.747          |   
+| k_neighbors         | 0.763          |   
+| tuned_decision_tree | 0.757          |   
+| random_forest       | 0.767          |  
+| ada_boost           | 0.790          |  
 
 
-## Visualizing Scores of the model with optimized parameters, GridSearch and RandomForest
-![image](https://user-images.githubusercontent.com/108379254/208559170-a368a12e-ce10-41e5-9a88-a82e1cdea3ae.png)
+#### XGBoost
+XGboost, also referred to as 'Extreme Gradient Boosting', is another boosting algorithm like Adaboost. Like Adaboost, XGBoost also builds weak learners and checks for performance. However rather than assign weights to the results, XGBoost calculates the residuals for each data point and then combines the results into a Loss Function to calculate overall loss. Then by using gradient descent, the losses are minimized.
 
+|        Model        | f1_score |
+|:-------------------:|:--------:|
+|       log_reg       |   0.709  |  
+|    decision_tree    |   0.747  |  
+|     k_neighbors     |   0.763  |  
+| tuned_decision_tree |   0.757  |  
+|    random_forest    |   0.767  |  
+|      ada_boost      |   0.790  |  
+|         xgb         | 0.789    |  
 
-## Checking the confusion matrix of model with top10 features Vs all_features
-![image](https://user-images.githubusercontent.com/108379254/208559334-bee72be7-f4b6-4655-a4f3-4ac1842dde2e.png)
+## Class imbalance
 
+We can try to address the class imbalance and convert the problem from a ternary classification to a binary classification problem and see if we get better results.
 
-We can see that the features make a negligible difference.
+|        Model        | f1_score 
+|:-------------------:|:--------
+|       log_reg       |   0.709  
+|    decision_tree    |   0.747  
+|     k_neighbors     |   0.763  
+| tuned_decision_tree |   0.757  
+|    random_forest    |   0.767  
+|      ada_boost      |   0.790  
+|         xgb         |   0.789  
+|   xgb_reclassified  |   0.804  
 
-## Examining target feature
-![image](https://user-images.githubusercontent.com/108379254/208487444-ba86e765-b029-4a20-8935-9892ad24e2b0.png)
+### Confusion matrix
 
-We can see clearly that there is an imbalance in the different classes.
-We will now train a model on a balanced dataset and test it on the validation data to see check for model performance.
+The Confusion Matrix is a graphical representation of `[TP,FP,TN,FN]` values. Let's look at the confusion matrix of the xgb model:
 
-## Confusion Matrix between balanced and unbalanced data
-![image](https://user-images.githubusercontent.com/108379254/208559440-0e82e9e8-0fb7-4b1b-9a4f-96afb4f7b6b1.png)
+![c](https://github.com/rahulakrish/water_pump_classifier/assets/108379254/67399e54-4b5d-454f-a49a-50e87114345d)
 
-# Next Steps
-1. Possibly re-frame this as a binary classification problem i.e functional vs non-functional and see if we can build a better model. 
-2. Re-create the model with equal number of data points between functional and non-functional. Optimize parameters on this balanced dataset and test it on validation data to check for performance.
 
 # More Information
  - [Notebook](phase3_project.ipynb)
  - [Presentation](presentation.pdf)
+
+## Limitations
+
+Hyperparameters of the different models can be tuned to extract more performance although this will be very time consuming.
+
+## Next Steps
+
+1. From the [Non-functional pumps deep-dive](#Non-functional-pumps-deep-dive), it is clear to see which regions are suffering the most. Personnel can be deployed straight away to those areas to fix the pumps. More nuanced analysis will uncover more patterns when analyzing the failed pumps.
+2. There is also a need to improve the data collection process. There is a lot superfluous data and lot of missing data that needs to be addressed. More nuanced and quality data will definitely aid in building more accurate models.
+3. Give that one contractor for both installation and maintenance far outweighs the others in terms of numbers, this could point systemic issues in the ways contracts are awarded or in the worst case point to corruption. Either way, this needs to be addressed for the sake of the citizens of Tanzania.
 
 ## Repository Structure
 
