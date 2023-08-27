@@ -14,6 +14,15 @@
   Since this a classifiaction problem, baseline models were built using Logistic Regression, Decision Trees and K-Nearest Neigbors.
   Out the of the three base models, the model with the best scores was chosen for further optimization
 
+## Mapping waterpump distribution
+
+![m](https://github.com/rahulakrish/water_pump_classifier/assets/108379254/9795d242-0030-4b18-a615-3c3d1f67e13c)
+
+We can that there are pockets through out the country where there are no pumps installed. This is could be because of geographical features like a desert,mountain range etc.
+
+From the map, we can see there seems to be an even spread between the functional and non-functional pumps except for the south eastern region where the pumps seem to be predominantly non-functional. Pumps that are functional but need repair are sparsely represented
+
+
 ## Non-functional Pump deep-dive
  Before modelling, it is worth looking at the data to see if we can uncover any patterns from the data:
 
