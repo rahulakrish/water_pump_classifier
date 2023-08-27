@@ -146,10 +146,6 @@ The Confusion Matrix is a graphical representation of `[TP,FP,TN,FN]` values. Le
 ![c](https://github.com/rahulakrish/water_pump_classifier/assets/108379254/67399e54-4b5d-454f-a49a-50e87114345d)
 
 
-# More Information
- - [Notebook](phase3_project.ipynb)
- - [Presentation](presentation.pdf)
-
 ## Limitations
 
 Hyperparameters of the different models can be tuned to extract more performance although this will be very time consuming.
@@ -159,6 +155,9 @@ Hyperparameters of the different models can be tuned to extract more performance
 1. From the [Non-functional pumps deep-dive](#Non-functional-pumps-deep-dive), it is clear to see which regions are suffering the most. Personnel can be deployed straight away to those areas to fix the pumps. More nuanced analysis will uncover more patterns when analyzing the failed pumps.
 2. There is also a need to improve the data collection process. There is a lot superfluous data and lot of missing data that needs to be addressed. More nuanced and quality data will definitely aid in building more accurate models.
 3. Give that one contractor for both installation and maintenance far outweighs the others in terms of numbers, this could point systemic issues in the ways contracts are awarded or in the worst case point to corruption. Either way, this needs to be addressed for the sake of the citizens of Tanzania.
+
+# Notebook
+ - [Notebook](notebook.ipynb)
 
 ## Repository Structure
 
