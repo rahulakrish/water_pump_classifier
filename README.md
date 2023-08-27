@@ -162,11 +162,11 @@ Hyperparameters of the different models can be tuned to extract more performance
 ## Repository Structure
 
 ```
+├── .gitignore
 ├── README.md
-├── notebook.pdf
-├── phase3_project.ipynb
-├── presentation.pdf
-└── repo.pdf
+├── notebook.ipynb
+├── tanzania.PNG
+└── waterwell.csv
 ```
 
 
