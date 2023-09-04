@@ -11,8 +11,7 @@
   Dataset sourced from https://www.drivendata.org/competitions/7/pump-it-up-data-mining-the-water-table/page/23/
   
 ## Methodololgy
-  Since this a classifiaction problem, baseline models were built using Logistic Regression, Decision Trees and K-Nearest Neigbors.
-  Out the of the three base models, the model with the best scores was chosen for further optimization
+ Different classification models were built and the model with the best f1-scores was chosen for optimization.
 
 ## Mapping waterpump distribution
 
@@ -24,7 +23,7 @@ From the map, we can see there seems to be an even spread between the functional
 
 
 ## Non-functional Pump deep-dive
- Before modelling, it is worth looking at the data to see if we can uncover any patterns from the data:
+ Before modelling, it is worth looking at non-functional pumps specifically and see if there are any patterns or outstanding factors that lead to their failures: 
 
 #### Non-functional pumps by Age
 The older the pump, the more likely it is to fail. We can run a histogram plot to check the rate of failures by age of the pumps:
@@ -34,12 +33,12 @@ The older the pump, the more likely it is to fail. We can run a histogram plot t
 From the plot, it is quite clear that there is a gap in data collection with majority of the pumps having no information about when they were installed. It is also surprising to see that the newer pumps have a higher failure rate compared to the older pumps.
 
 #### Non-fuctional pumps by Installer
-From the data, there are 1201 companies that have installed the pumps.Are there certain installers who have more mal fucntioning pumps than others? Visualizing all 1201 companies is difficult given the size, but we can look at the top 20 companies with the most failures:
+From the data, there are 1201 companies that have installed the pumps.Are some installers have a higher failure rate than others? Visualizing all 1201 companies is difficult, but we can look at the top 20 companies with the most failures:
 
  ![installer](https://github.com/rahulakrish/water_pump_classifier/assets/108379254/ab1bb622-85e5-4740-955e-d339447ac11c)
 
 It is quite clear to see that pumps installed by DWE far outnumber the rest of the companies by factor of almost 7.
-Another question that can be asked is why one single company was given the responsibility with installing so many pumps.
+Another question that can be asked is why one single company was given the responsibility of installing so many pumps.
 
 #### Non functional pumps by Management
 Like the installers, we can also check to see if certain companies tasked with managing the pumps perform worse compared to the others:
@@ -52,8 +51,8 @@ We can plot non-functional pumps by region to see so we can focus our attention 
 
 ![vill](https://github.com/rahulakrish/water_pump_classifier/assets/108379254/a4bc7622-7027-4672-8275-e829004cd64c)
 
-
- ## Test Scores of baseline models
+## Modelling
+## Test Scores of baseline models
 | Model         | f1_score |
 |---------------|----------|
 | Log_reg       | 0.709    |
